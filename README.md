@@ -76,33 +76,60 @@ soon.
 https://github.com/docker/labs/tree/master/developer-tools/java/
 
 ## commands
+check
 ```
-$ docker --version
-$ docker ps  # check for errors
+$ docker -v  # version
+$ docker version  # clien & server
+$ docker ps  # check running containers
 $ docker info  # system-wide info
 $ docker-machine ip
-$ docker system prune -a  # remove unused data/total cleanup
+```
+image
+```
 $ docker image ls -a  # List all images on this machine
+$ docker pull jenkins  # get image from public repo/registry
+```
+```
+$ docker run <image>
+$ docker run -p 4000:80 <image>  # Run "friendlyname" mapping port 4000 to 80
+$ docker run -d -p 4000:80 <image>  # in detached/daemon mode
+$ docker run username/repository:tag  # from a registry
+$ docker run -p 8080:8080 --name=<container> <image>  # give container name
+```
+container
+```
 $ docker container ls  # List all running containers
 $ docker container ls -a  # List all containers, even those not running
+$ docker logs <container>  # see logs
+$ docker exec -it <container> bash  # open bash in container
 ```
-
+```
+docker stop <container>
+docker start <container>
+docker container stop <container>
+docker container stop <hash>
+```
+```
+docker rm <container>
+docker container rm <hash>  # remove container
+```
+house-keeping
+```
+$ docker system prune -a  # remove unused data/total cleanup
+```
 ## from docker
 ```
 docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker run -p 4000:80 friendlyhello  # Run "friendlyname" mapping port 4000 to 80
-docker run -d -p 4000:80 friendlyhello         # Same thing, but in detached mode
-docker container ls                                # List all running containers
-docker container ls -a             # List all containers, even those not running
-docker container stop <hash>           # Gracefully stop the specified container
 docker container kill <hash>         # Force shutdown of the specified container
-docker container rm <hash>        # Remove specified container from this machine
-docker container rm $(docker container ls -a -q)         # Remove all containers
-docker image ls -a                             # List all images on this machine
 docker image rm <image id>            # Remove specified image from this machine
 docker image rm $(docker image ls -a -q)   # Remove all images from this machine
 docker login             # Log in this CLI session using your Docker credentials
 docker tag <image> username/repository:tag  # Tag <image> for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
-docker run username/repository:tag                   # Run image from a registry
 ```
+
+# other images
+- https://github.com/mysql/mysql-docker
+- oracle
+- jboss fuse
+- pentaho
