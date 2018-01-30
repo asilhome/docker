@@ -80,7 +80,8 @@ check
 ```
 $ docker -v  # version
 $ docker version  # clien & server
-$ docker ps  # check running containers
+$ docker ps  # list running containers
+$ docker ps -a  # list all containers
 $ docker info  # system-wide info
 $ docker-machine ip
 ```
