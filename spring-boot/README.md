@@ -1,4 +1,8 @@
 # dockerize spring boot
+- https://hub.docker.com/_/openjdk/
+  - openjdk:<version>
+  - openjdk:alpine # lack git/bash
+
 ## spring boot
 ### run
 ```
@@ -25,7 +29,7 @@ docker build -t spring-boot .
 ```
 ### docker run
 ```
-$ docker run -p 8080:8080 -t spring-boot
+docker run -d -p 8080:8080 --name=boot spring-boot
 ```
 goto http://localhost:8080
 

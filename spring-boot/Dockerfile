@@ -1,5 +1,5 @@
 FROM openjdk:8-jdk-alpine
-COPY target/*.jar /usr/src/boot/
-WORKDIR /usr/src/boot
+COPY target/spring-boot-0.0.1-SNAPSHOT.jar /usr/src/app.jar
+WORKDIR /usr/src
 EXPOSE 8080
-CMD ["java", "-jar", "spring-boot-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "app.jar"]

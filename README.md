@@ -2,6 +2,7 @@
 https://docs.docker.com/get-started/
 
 ## projects
+- [spring-boot](/spring-boot/README.md)
 - [jenkins](/jenkins/README.md)
 
 ## installation
@@ -24,36 +25,7 @@ TBD
 ## signup
 https://cloud.docker.com/
 
-## image
-- Dockerfile
-
-### build
-```
-$ docker build -t <image> .
-```
-
-### run
-```
-$ docker run -p 4000:80 <image>
-```
-goto `http://<docker-machine-ip>:4000` # docker toolbox windows 7
-
 ## container
-### stop
-```
-$ CTRL-C
-```
-windows:
-```
-$ docker container ls
-$ docker container stop <Container NAME or ID>
-```
-#### detached mode
-```
-$ docker run -d -p 4000:80 <image>
-$ docker container stop <Container NAME or ID>
-```
-
 ## share image to repository
 https://cloud.docker.com/
 ```
@@ -65,18 +37,9 @@ $ docker tag <image> <username>/<repository>:<tag>
 ```
 $ docker push <username>/<repository>:<tag>
 ```
-### run
-```
-$ docker run -p 4000:80 <username>/<repository>:<tag>
-```
-
-## with java
-soon.
-
-https://github.com/docker/labs/tree/master/developer-tools/java/
 
 ## commands
-check
+### check
 ```
 $ docker -v  # version
 $ docker version  # clien & server
@@ -85,45 +48,47 @@ $ docker ps -a  # list all containers
 $ docker info  # system-wide info
 $ docker-machine ip
 ```
-image
+### image
+- Dockerfile
+
+```
+$ docker build -t <image> .  # and tag a name
+```
 ```
 $ docker image ls -a  # List all images on this machine
+```
+```
+$ docker run -d -p 8080:8080 --name=<container> <image>  # give container name
+$ docker run username/repository:tag  # from a registry
+```
+```
+$ docker image rm <image>
+docker image rm $(docker image ls -a -q)  # remove all images from this machine
+```
+```
 $ docker pull jenkins  # get image from public repo/registry
 ```
+goto `http://<docker-machine-ip>:8080`
+
+### container
 ```
-$ docker run <image>
-$ docker run -p 4000:80 <image>  # Run "friendlyname" mapping port 4000 to 80
-$ docker run -d -p 4000:80 <image>  # in detached/daemon mode
-$ docker run username/repository:tag  # from a registry
-$ docker run -p 8080:8080 --name=<container> <image>  # give container name
-```
-container
-```
-$ docker container ls  # List all running containers
-$ docker container ls -a  # List all containers, even those not running
+$ docker container ls -a  # running only
+$ docker container ls -a  # plus not running
 $ docker logs <container>  # see logs
 $ docker exec -it <container> bash  # open bash in container
 ```
 ```
-docker stop <container>
 docker start <container>
-docker container stop <container>
-docker container stop <hash>
-```
-```
+docker stop <container>
 docker rm <container>
-docker container rm <hash>  # remove container
 ```
-house-keeping
+
+### house-keeping
 ```
-$ docker system prune -a  # remove unused data/total cleanup
+$ docker system prune -a  # remove/cleanup images & containers
 ```
-## from docker
+#### from docker
 ```
-docker build -t friendlyhello .  # Create image using this directory's Dockerfile
-docker container kill <hash>         # Force shutdown of the specified container
-docker image rm <image id>            # Remove specified image from this machine
-docker image rm $(docker image ls -a -q)   # Remove all images from this machine
 docker login             # Log in this CLI session using your Docker credentials
 docker tag <image> username/repository:tag  # Tag <image> for upload to registry
 docker push username/repository:tag            # Upload tagged image to registry
