@@ -5,6 +5,8 @@ get jenkins image (old version)
 ```
 $ docker pull jenkins
 ```
+try this https://hub.docker.com/r/jenkins/jenkins/
+
 run in detached mode
 ```
 $ docker run -p 8080:8080 --name=jenkins-master -d jenkins
