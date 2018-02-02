@@ -19,8 +19,12 @@ open `docker quickstart terminal (bash)`
 ```
 $ docker run hello-world
 ```
-## shared directories
-TBD
+## add/update port forwarding
+- oracle vm virtualbox > running vm > settings > network > nat > advanced
+  - host ip: <ipconfig>
+  - host port
+  - guest ip: <docker-machine ip>
+  - guest port: <expose>
 
 ## signup
 https://cloud.docker.com/
@@ -50,7 +54,9 @@ $ docker-machine ip
 ```
 ### image
 - Dockerfile
-
+```
+$ docker pull <image>  # get image from public repo/registry
+```
 ```
 $ docker build -t <image> .  # and tag a name
 ```
@@ -64,9 +70,6 @@ $ docker run username/repository:tag  # from a registry
 ```
 $ docker image rm <image>
 docker image rm $(docker image ls -a -q)  # remove all images from this machine
-```
-```
-$ docker pull jenkins  # get image from public repo/registry
 ```
 goto `http://<docker-machine-ip>:8080`
 

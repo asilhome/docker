@@ -55,9 +55,36 @@ jenkins > manage jenkins > configure system > gitlab
 * credentials: gitlab api token > gitlab user profile access token
 * api-level: `v3`
 
+## jenkins job
+General
+- Project name: jenkins-boot-dev01
+- Discard old builds
+- GitLab connection: gitlab-connection
+Source Code Management
+- Git
+  - Repositories
+    - Repository URL: git@10.10.11.50:test_automation_grp/jenkins-boot.git
+    - Name: origin
+    - Refspec: +refs/heads/*:refs/remotes/origin/* +refs/merge-requests/*/head:refs/remotes/origin/merge-requests/*
+  - Branches to build
+    - Branch Specifier (blank for 'any'): refs/heads/dev01
+Build Triggers
+- Build when a change is pushed to GitLab. GitLab CI Service URL: http://10.10.1.201:8080/project/jenkins-boot-dev01
+  - Enabled GitLab triggers: Accepted Merge Request Events
+Build
+- Invoke top-level Maven targets
+  - Maven version: manage jenkins > global tool configuration > maven > name
+  - Goals: clean package
+Post-build Actions
+- Archive the artifacts: `**/target/*.jar`
+- Publish JUnit test result report: `**/target/surefire-reports/*.xml`
+- Publish build status to GitLab commit (GitLab 8.1+ required)
+- Email notification
+
 ## network
-- $ docker network create --driver bridge --subnet=10.10.2.00/16 --gateway=10.10.2.38 dockernet
-- $ $ docker run -p 10.10.2.38:8080:8080 --name=jenkins-master --network=dockernet-d jenkins
+```
+docker network ls  # list networks
+```
 
 ## deploy container to server
 
@@ -66,12 +93,3 @@ yzP5icdXccYsZ6QQdP1-
 
 http://192.168.99.100:8080/project/jenkins-boot-dev01-branch
 docker run -p 192.168.10.20:80:80 mywebserver
-
-docker network ls  # list networks
-docker network inspect <network-name>  # a network info
-docker network create --driver bridge <network-name>  # create network
-docker network rm <network-name>  # remove network
-
-user specified IP address is supported on user defined networks only.
-
-$ docker network create --driver bridge --subnet=10.10.2.00/16 --gateway=10.10.2.38 dockernet
