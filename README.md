@@ -69,7 +69,7 @@ $ docker run username/repository:tag  # from a registry
 ```
 ```
 $ docker image rm <image>
-docker image rm $(docker image ls -a -q)  # remove all images from this machine
+$ docker image rm $(docker image ls -a -q)  # remove all images from this machine
 ```
 goto `http://<docker-machine-ip>:8080`
 
@@ -79,6 +79,7 @@ $ docker container ls -a  # running only
 $ docker container ls -a  # plus not running
 $ docker logs <container>  # see logs
 $ docker exec -it <container> bash  # open bash in container
+$ docker inspect <container>  # detail about container
 ```
 ```
 docker start <container>
@@ -92,9 +93,14 @@ $ docker system prune -a  # remove/cleanup images & containers
 ```
 #### from docker
 ```
-docker login             # Log in this CLI session using your Docker credentials
+docker login  # Log in this CLI session using your Docker credentials
 docker tag <image> username/repository:tag  # Tag <image> for upload to registry
-docker push username/repository:tag            # Upload tagged image to registry
+docker push username/repository:tag  # Upload tagged image to registry
+```
+
+### network
+```
+docker network ls  # list networks
 ```
 
 # other images
