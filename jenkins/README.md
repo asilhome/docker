@@ -1,14 +1,26 @@
-# jenkins
+# jenkins v2.89.2
+https://hub.docker.com/r/jenkins/jenkins/
+
 ## image (v2.60.3 - old version)
-new, try this https://hub.docker.com/r/jenkins/jenkins/
+by dockerfile (2 jenkins images created)
 ```
-$ docker pull jenkins
+$ docker build -t jenkins .
 ```
+or latest
+```
+$ docker pull jenkins  # v2.60.3
+```
+
+### tags
+https://hub.docker.com/r/jenkins/jenkins/tags/
 
 ## run
 in detached mode
 ```
 $ docker run -p 8080:8080 --name=jenkins-master -d jenkins
+```
+```
+$ docker run -p 8080:8080 --name=jenkins-master -d -v jenkins_home:/var/jenkins_home jenkins
 ```
 remove 1st if to start `docker run` again (will generate new initial password)
 

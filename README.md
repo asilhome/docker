@@ -69,6 +69,7 @@ $ docker run username/repository:tag  # from a registry
 ```
 ```
 $ docker image rm <image>
+$ docker image rm username/<image>:tag
 $ docker image rm $(docker image ls -a -q)  # remove all images from this machine
 ```
 goto `http://<docker-machine-ip>:8080`
