@@ -4,25 +4,32 @@ https://hub.docker.com/r/jenkins/jenkins/
 ## image (v2.60.3 - old version)
 by dockerfile (2 jenkins images created)
 ```
-$ docker build -t jenkins .
+$ docker build -t jenkins --rm=true .
 ```
 or latest
 ```
 $ docker pull jenkins  # v2.60.3
 ```
+tags ref: https://hub.docker.com/r/jenkins/jenkins/tags/
 
-### tags
-https://hub.docker.com/r/jenkins/jenkins/tags/
+## volume
+referring to dockerfile: `VOLUME ["/var/jenkins_home"]`
+```
+$ docker volume create --name=jenkins-home
+$ docker volume ls
+```
 
 ## run
+attach to volume
+```
+$ docker run -p 8082:8080 --name=jenkins-master --volume=jenkins-home:/var/jenkins_home -d jenkins
+```
 in detached mode
 ```
 $ docker run -p 8080:8080 --name=jenkins-master -d jenkins
 ```
-```
-$ docker run -p 8080:8080 --name=jenkins-master -d -v jenkins_home:/var/jenkins_home jenkins
-```
-remove 1st if to start `docker run` again (will generate new initial password)
+* left host:port determine port forwarding for both host & guest
+* remove 1st if to start `docker run` again (will generate new initial password)
 
 ### port-forwarding (optional)
 add/update > goto: `http://<static-ip>:8080`
@@ -94,10 +101,7 @@ manage jenkins > global tool configuration > maven > add maven
   - Email notification
 
 ## gitlab webhooks
-- url
-```
-http://JENKINS-HOST/project/JOB
-```
+- url: `http://JENKINS-HOST:PORT/project/JOB`
 - trigger: `merge request events`
 - enable ssl verification: `uncheck`
 

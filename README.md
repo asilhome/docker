@@ -92,6 +92,10 @@ docker rm <container>
 ```
 $ docker system prune -a  # remove/cleanup images & containers
 ```
+```
+$ docker volume ls -f dangling=true  # check volumes not attach to container
+$ docker volume prune
+```
 #### from docker
 ```
 docker login  # Log in this CLI session using your Docker credentials
