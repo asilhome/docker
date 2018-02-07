@@ -1,6 +1,11 @@
 # jenkins v2.89.2
 https://hub.docker.com/r/jenkins/jenkins/
 
+## todo
+- deploy container to server
+- instead of git clone by http, should use ssh
+- webhooks test doesn't work anymore
+
 ## image (v2.60.3 - old version)
 by dockerfile (2 jenkins images created)
 ```
@@ -104,5 +109,3 @@ manage jenkins > global tool configuration > maven > add maven
 - url: `http://JENKINS-HOST:PORT/project/JOB`
 - trigger: `merge request events`
 - enable ssl verification: `uncheck`
-
-## deploy container to server
